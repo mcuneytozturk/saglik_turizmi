@@ -5,7 +5,9 @@ import com.mcuneytozturk.saglikturizmi.database.repository.FlightRepository;
 import com.mcuneytozturk.saglikturizmi.mapper.FlightMapper;
 import com.mcuneytozturk.saglikturizmi.model.FlightDTO;
 import com.mcuneytozturk.saglikturizmi.util.BaseService;
+import org.springframework.stereotype.Service;
 
+@Service
 public class FlightService extends BaseService<FlightEntity, FlightDTO, FlightMapper, FlightRepository> {
 
     private final FlightMapper flightMapper;

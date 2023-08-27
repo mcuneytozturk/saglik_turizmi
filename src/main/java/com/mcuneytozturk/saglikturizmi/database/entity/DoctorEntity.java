@@ -30,4 +30,6 @@ public class DoctorEntity extends BaseEntity {
     private HospitalEntity hospital;
     @OneToMany(mappedBy = "doctor", fetch = FetchType.LAZY)
     private List<ReportEntity> reports;
+    @OneToMany
+    private List<AppointmentEntity> appointments;
 }

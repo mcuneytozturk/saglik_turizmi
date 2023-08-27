@@ -6,6 +6,8 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import java.util.List;
+
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "patients")
@@ -29,4 +31,10 @@ public class PatientEntity extends BaseEntity {
         private String password;
         @Column
         private String photoLink;
+        @OneToOne
+        private ReservationEntity reservation;
+        @OneToOne
+        private AppointmentEntity appointment;
+        @OneToMany
+        private List<ReportEntity> reports;
 }

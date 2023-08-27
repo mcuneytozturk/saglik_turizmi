@@ -33,5 +33,4 @@ public class FlightEntity extends BaseEntity {
         private String arrivalLocation;
         @Column
         private int capacity;
-
 }

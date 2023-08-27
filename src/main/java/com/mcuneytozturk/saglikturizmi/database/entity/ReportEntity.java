@@ -18,7 +18,7 @@ import lombok.EqualsAndHashCode;
 )
 @Data
 public class ReportEntity extends BaseEntity {
-        @OneToOne
+        @ManyToOne
         private PatientEntity patient;
 
         @ManyToOne(fetch = FetchType.LAZY)

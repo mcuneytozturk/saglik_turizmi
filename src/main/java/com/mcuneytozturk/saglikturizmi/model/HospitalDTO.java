@@ -8,9 +8,9 @@ import java.util.List;
 @Data
 public class HospitalDTO extends BaseDTO {
     private String name;
+    private String city;
     private List<DoctorDTO> doctors;
     private List<PatientDTO> patients;
-    private String city;
 
 
 }

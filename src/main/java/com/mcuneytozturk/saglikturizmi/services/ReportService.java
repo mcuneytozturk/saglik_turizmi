@@ -5,7 +5,9 @@ import com.mcuneytozturk.saglikturizmi.database.repository.ReportRepository;
 import com.mcuneytozturk.saglikturizmi.mapper.ReportMapper;
 import com.mcuneytozturk.saglikturizmi.model.ReportDTO;
 import com.mcuneytozturk.saglikturizmi.util.BaseService;
+import org.springframework.stereotype.Service;
 
+@Service
 public class ReportService extends BaseService<ReportEntity, ReportDTO, ReportMapper, ReportRepository> {
     private final ReportMapper reportMapper;
     private final ReportRepository reportRepository;

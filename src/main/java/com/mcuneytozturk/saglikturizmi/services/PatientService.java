@@ -5,7 +5,9 @@ import com.mcuneytozturk.saglikturizmi.database.repository.PatientRepository;
 import com.mcuneytozturk.saglikturizmi.mapper.PatientMapper;
 import com.mcuneytozturk.saglikturizmi.model.PatientDTO;
 import com.mcuneytozturk.saglikturizmi.util.BaseService;
+import org.springframework.stereotype.Service;
 
+@Service
 public class PatientService extends BaseService<PatientEntity, PatientDTO, PatientMapper, PatientRepository> {
     private final PatientMapper patientMapper;
     private final PatientRepository patientRepository;

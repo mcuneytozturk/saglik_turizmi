@@ -3,10 +3,12 @@ package com.mcuneytozturk.saglikturizmi.mapper;
 import com.mcuneytozturk.saglikturizmi.database.entity.AdminEntity;
 import com.mcuneytozturk.saglikturizmi.model.AdminDTO;
 import com.mcuneytozturk.saglikturizmi.util.BaseMapper;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class AdminMapper implements BaseMapper<AdminDTO, AdminEntity> {
     @Override
     public AdminDTO entityToDTO(AdminEntity entity) {

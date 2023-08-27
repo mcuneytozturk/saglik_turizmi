@@ -2,13 +2,14 @@ package com.mcuneytozturk.saglikturizmi.mapper;
 
 import com.mcuneytozturk.saglikturizmi.database.entity.RoomEntity;
 import com.mcuneytozturk.saglikturizmi.model.RoomDTO;
+import com.mcuneytozturk.saglikturizmi.util.BaseMapper;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class RoomMapper{
+public class RoomMapper implements BaseMapper<RoomDTO, RoomEntity> {
 
     private final HotelMapper hotelMapper;
 
@@ -16,6 +17,17 @@ public class RoomMapper{
         this.hotelMapper = hotelMapper;
     }
 
+    @Override
+    public RoomDTO entityToDTO(RoomEntity entity) {
+        RoomDTO dto = new RoomDTO();
+        dto.setId(entity.getId());
+        dto.setCapacity(entity.getCapacity());
+        dto.setCheckInDate(entity.getCheckInDate());
+        dto.setCheckOutDate(entity.getCheckOutDate());
+        dto.setHotel(hotelMapper.entityToDTO(entity.getHotel()));
+        return dto;
+    }
+    @Override
     public RoomEntity dtoToEntity(RoomDTO dto){
         RoomEntity entity = new RoomEntity();
         entity.setId(dto.getId());
@@ -27,27 +39,18 @@ public class RoomMapper{
         return entity;
     }
 
-    public RoomDTO entityToDto(RoomEntity entity){
-        RoomDTO dto = new RoomDTO();
-        dto.setId(entity.getId());
-        dto.setCapacity(entity.getCapacity());
-        dto.setCheckInDate(entity.getCheckInDate());
-        dto.setCheckOutDate(entity.getCheckOutDate());
-        dto.setHotel(hotelMapper.entityToDTO(entity.getHotel()));
-        return dto;
-    }
-
+    @Override
     public List<RoomDTO> entityListToDTOList(List<RoomEntity> entityList) {
         List<RoomDTO> dtoList = new ArrayList<>();
 
         for (RoomEntity entity: entityList){
-            dtoList.add(entityToDto(entity));
+            dtoList.add(entityToDTO(entity));
         }
 
         return dtoList;
     }
 
-
+    @Override
     public List<RoomEntity> dtoListTOEntityList(List<RoomDTO> dtoList) {
 
         List<RoomEntity> entityList = new ArrayList<>();
@@ -58,7 +61,7 @@ public class RoomMapper{
 
         return entityList;
     }
-
+    @Override
     public RoomEntity dtoToExistEntity(RoomEntity entity, RoomDTO dto) {
         entity.setId(dto.getId());
         entity.setCapacity(dto.getCapacity());

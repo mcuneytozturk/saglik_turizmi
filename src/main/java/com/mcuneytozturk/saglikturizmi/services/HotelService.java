@@ -7,7 +7,9 @@ import com.mcuneytozturk.saglikturizmi.mapper.HotelMapper;
 import com.mcuneytozturk.saglikturizmi.mapper.RoomMapper;
 import com.mcuneytozturk.saglikturizmi.model.HotelDTO;
 import com.mcuneytozturk.saglikturizmi.util.BaseService;
+import org.springframework.stereotype.Service;
 
+@Service
 public class HotelService extends BaseService<HotelEntity, HotelDTO, HotelMapper, HotelRepository> {
     private final HotelMapper hotelMapper;
     private final HotelRepository hotelRepository;

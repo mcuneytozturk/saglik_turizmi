@@ -50,7 +50,7 @@ public abstract class BaseService<
         }
     }
 
-    public Boolean deleteByUUID(UUID uuid) {
+    public Boolean delete(UUID uuid) {
         Entity entity = getRepository().findByUuid(uuid).orElse(null);
         if (entity != null) {
             getRepository().delete(entity);

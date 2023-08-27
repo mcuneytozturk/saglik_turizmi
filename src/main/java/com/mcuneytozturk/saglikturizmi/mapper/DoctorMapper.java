@@ -14,11 +14,13 @@ public class DoctorMapper implements BaseMapper<DoctorDTO, DoctorEntity> {
     private final HospitalMapper hospitalMapper;
     private final PatientMapper patientMapper;
     private final ReportMapper reportMapper;
+    private final AppointmentMapper appointmentMapper;
 
-    public DoctorMapper(HospitalMapper hospitalMapper, PatientMapper patientMapper, ReportMapper reportMapper) {
+    public DoctorMapper(HospitalMapper hospitalMapper, PatientMapper patientMapper, ReportMapper reportMapper, AppointmentMapper appointmentMapper) {
         this.hospitalMapper = hospitalMapper;
         this.patientMapper = patientMapper;
         this.reportMapper = reportMapper;
+        this.appointmentMapper = appointmentMapper;
     }
 
     @Override
@@ -33,7 +35,7 @@ public class DoctorMapper implements BaseMapper<DoctorDTO, DoctorEntity> {
         dto.setHospital(hospitalMapper.entityToDTO(entity.getHospital()));
         dto.setPatients(patientMapper.entityListToDTOList(entity.getPatients()));
         dto.setReports(reportMapper.entityListToDTOList(entity.getReports()));
-
+        dto.setAppointments(appointmentMapper.entityListToDTOList(entity.getAppointments()));
         return dto;
     }
 
@@ -49,6 +51,7 @@ public class DoctorMapper implements BaseMapper<DoctorDTO, DoctorEntity> {
         entity.setHospital(hospitalMapper.dtoToEntity(dto.getHospital()));
         entity.setPatients(patientMapper.dtoListTOEntityList(dto.getPatients()));
         entity.setReports(reportMapper.dtoListTOEntityList(dto.getReports()));
+        entity.setAppointments(appointmentMapper.dtoListTOEntityList(dto.getAppointments()));
 
         return entity;
     }
@@ -86,6 +89,7 @@ public class DoctorMapper implements BaseMapper<DoctorDTO, DoctorEntity> {
         entity.setHospital(hospitalMapper.dtoToEntity(dto.getHospital()));
         entity.setPatients(patientMapper.dtoListTOEntityList(dto.getPatients()));
         entity.setReports(reportMapper.dtoListTOEntityList(dto.getReports()));
+        entity.setAppointments(appointmentMapper.dtoListTOEntityList(dto.getAppointments()));
 
         return entity;
     }
