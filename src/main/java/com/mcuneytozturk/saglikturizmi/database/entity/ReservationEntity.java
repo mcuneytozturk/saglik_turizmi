@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @EqualsAndHashCode(callSuper = true)
@@ -23,8 +24,10 @@ public class ReservationEntity extends BaseEntity {
     @OneToOne
     private PatientEntity patient;
     @Column
-    private LocalDateTime reservationDate;
+    private LocalDate checkInDate;
+    @Column
+    private LocalDate checkOutDate;
     //burda rezervasyonun ödemesinin alınıp alınmadığı tutulur
     @Column
-    private boolean isPaid = false;
+    private boolean paid = false;
 }

@@ -1,4 +1,5 @@
 package com.mcuneytozturk.saglikturizmi.util;
+import com.mcuneytozturk.saglikturizmi.model.PageDTO;
 import com.mcuneytozturk.saglikturizmi.util.dbUtil.BaseEntity;
 import com.mcuneytozturk.saglikturizmi.util.dbUtil.BaseRepository;
 import org.springframework.data.domain.Page;
@@ -6,6 +7,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
+import java.util.List;
 import java.util.UUID;
 
 
@@ -21,7 +23,13 @@ public abstract class BaseService<
 
     protected abstract Repository getRepository();
 
+    public PageDTO<DTO> getAll(int pageNum, int size){
+        Pageable pageable = PageRequest.of(1, 10, Sort.by("id").descending());
 
+        Page<Entity> entityPage = getRepository().findAll(pageable);
+
+        return getMapper().pageEntityToPageDTO(entityPage);
+    }
 
     public DTO save(DTO dto) {
         Entity entity = getMapper().dtoToEntity(dto);

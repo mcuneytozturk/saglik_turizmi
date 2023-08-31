@@ -2,7 +2,9 @@ package com.mcuneytozturk.saglikturizmi.mapper;
 
 import com.mcuneytozturk.saglikturizmi.database.entity.AdminEntity;
 import com.mcuneytozturk.saglikturizmi.model.AdminDTO;
+import com.mcuneytozturk.saglikturizmi.model.PageDTO;
 import com.mcuneytozturk.saglikturizmi.util.BaseMapper;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -21,6 +23,8 @@ public class AdminMapper implements BaseMapper<AdminDTO, AdminEntity> {
         dto.setPassword(entity.getPassword());
         dto.setFirstName(entity.getFirstName());
         dto.setLastName(entity.getLastName());
+        dto.setEmail(entity.getEmail());
+
         return dto;
     }
 
@@ -35,6 +39,8 @@ public class AdminMapper implements BaseMapper<AdminDTO, AdminEntity> {
         entity.setPassword(dto.getPassword());
         entity.setFirstName(dto.getFirstName());
         entity.setLastName(dto.getLastName());
+        entity.setEmail(dto.getEmail());
+
         return entity;
     }
 
@@ -71,7 +77,23 @@ public class AdminMapper implements BaseMapper<AdminDTO, AdminEntity> {
         entity.setPassword(dto.getPassword());
         entity.setFirstName(dto.getFirstName());
         entity.setLastName(dto.getLastName());
+        entity.setEmail(dto.getEmail());
 
         return entity;
+    }
+
+    @Override
+    public PageDTO<AdminDTO> pageEntityToPageDTO(Page<AdminEntity> entities) {
+        PageDTO<AdminDTO> pageDTO = new PageDTO<>();
+        pageDTO.setTotalPages(entities.getTotalPages());
+        pageDTO.setSort(entities.getSort());
+        pageDTO.setNumberOfElements(entities.getNumberOfElements());
+        pageDTO.setSize(entities.getSize());
+        pageDTO.setContent(entityListToDTOList(entities.getContent()));
+        pageDTO.setTotalElements(entities.getTotalElements());
+        pageDTO.setNumber(entities.getNumber());
+
+
+        return pageDTO;
     }
 }

@@ -18,13 +18,11 @@ import java.util.List;
 @Data
 public class RoomEntity extends BaseEntity {
         @Column
-        private int capacity;
+        private int roomNumber;
         @Column
-        private LocalDate checkInDate;
-        @Column
-        private LocalDate checkOutDate;
+        private String roomType;
         @ManyToOne
         private HotelEntity hotel;
-        @OneToMany
+        @OneToMany(fetch = FetchType.LAZY)
         private List<ReservationEntity> reservations;
 }

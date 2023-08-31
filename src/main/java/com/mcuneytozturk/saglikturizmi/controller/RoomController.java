@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping
+@RequestMapping("room")
 public class RoomController extends BaseController<RoomEntity, RoomDTO, RoomRepository, RoomMapper, RoomService> {
     private final RoomService roomService;
     public RoomController(RoomService roomService) {

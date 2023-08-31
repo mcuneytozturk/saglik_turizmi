@@ -21,7 +21,7 @@ public class ReportEntity extends BaseEntity {
         @ManyToOne
         private PatientEntity patient;
 
-        @ManyToOne(fetch = FetchType.LAZY)
+        @ManyToOne
         private DoctorEntity doctor;
 
         @Column

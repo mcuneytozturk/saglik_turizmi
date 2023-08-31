@@ -1,6 +1,7 @@
 package com.mcuneytozturk.saglikturizmi.database.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.mcuneytozturk.saglikturizmi.util.dbUtil.BaseEntity;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -23,10 +24,8 @@ public class HospitalEntity extends BaseEntity {
         private String name;
         @Column
         private String city;
-        @OneToMany
+        @OneToMany(fetch = FetchType.LAZY)
         private List<DoctorEntity> doctors;
-        @OneToMany
+        @OneToMany(fetch = FetchType.LAZY)
         private List<PatientEntity> patients;
-
-
 }

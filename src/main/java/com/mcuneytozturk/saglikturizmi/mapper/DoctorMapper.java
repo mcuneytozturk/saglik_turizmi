@@ -1,8 +1,13 @@
 package com.mcuneytozturk.saglikturizmi.mapper;
 
+import com.mcuneytozturk.saglikturizmi.database.entity.AppointmentEntity;
 import com.mcuneytozturk.saglikturizmi.database.entity.DoctorEntity;
+import com.mcuneytozturk.saglikturizmi.model.AppointmentDTO;
 import com.mcuneytozturk.saglikturizmi.model.DoctorDTO;
+import com.mcuneytozturk.saglikturizmi.model.PageDTO;
 import com.mcuneytozturk.saglikturizmi.util.BaseMapper;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -11,12 +16,13 @@ import java.util.List;
 @Component
 public class DoctorMapper implements BaseMapper<DoctorDTO, DoctorEntity> {
 
+
     private final HospitalMapper hospitalMapper;
     private final PatientMapper patientMapper;
     private final ReportMapper reportMapper;
     private final AppointmentMapper appointmentMapper;
 
-    public DoctorMapper(HospitalMapper hospitalMapper, PatientMapper patientMapper, ReportMapper reportMapper, AppointmentMapper appointmentMapper) {
+    public DoctorMapper(@Lazy HospitalMapper hospitalMapper, PatientMapper patientMapper, @Lazy ReportMapper reportMapper, AppointmentMapper appointmentMapper) {
         this.hospitalMapper = hospitalMapper;
         this.patientMapper = patientMapper;
         this.reportMapper = reportMapper;
@@ -92,6 +98,21 @@ public class DoctorMapper implements BaseMapper<DoctorDTO, DoctorEntity> {
         entity.setAppointments(appointmentMapper.dtoListTOEntityList(dto.getAppointments()));
 
         return entity;
+    }
+
+    @Override
+    public PageDTO<DoctorDTO> pageEntityToPageDTO(Page<DoctorEntity> entities) {
+        PageDTO<DoctorDTO> pageDTO = new PageDTO<>();
+        pageDTO.setTotalPages(entities.getTotalPages());
+        pageDTO.setSort(entities.getSort());
+        pageDTO.setNumberOfElements(entities.getNumberOfElements());
+        pageDTO.setSize(entities.getSize());
+        pageDTO.setContent(entityListToDTOList(entities.getContent()));
+        pageDTO.setTotalElements(entities.getTotalElements());
+        pageDTO.setNumber(entities.getNumber());
+
+
+        return pageDTO;
     }
 }
 

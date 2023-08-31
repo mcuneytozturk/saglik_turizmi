@@ -22,6 +22,6 @@ public class HotelEntity extends BaseEntity {
         private String name;
         @Column
         private String city;
-        @OneToMany
+        @OneToMany(fetch = FetchType.LAZY)
         private List<RoomEntity> rooms;
 }

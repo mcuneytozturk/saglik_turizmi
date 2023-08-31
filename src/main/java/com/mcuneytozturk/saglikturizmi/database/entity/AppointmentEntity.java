@@ -4,6 +4,7 @@ import com.mcuneytozturk.saglikturizmi.util.dbUtil.BaseEntity;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.springframework.data.annotation.CreatedDate;
 
 import java.time.LocalDateTime;
 
@@ -18,7 +19,6 @@ import java.time.LocalDateTime;
 )
 @Data
 public class AppointmentEntity extends BaseEntity {
-
     @ManyToOne
     private DoctorEntity doctor;
     @OneToOne
@@ -26,5 +26,5 @@ public class AppointmentEntity extends BaseEntity {
     @Column
     private LocalDateTime reservationDate;
     @Column
-    private boolean isAccepted = false;
+    private boolean accepted = false;
 }

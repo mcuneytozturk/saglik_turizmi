@@ -1,8 +1,13 @@
 package com.mcuneytozturk.saglikturizmi.mapper;
 
+import com.mcuneytozturk.saglikturizmi.database.entity.AppointmentEntity;
 import com.mcuneytozturk.saglikturizmi.database.entity.HotelEntity;
+import com.mcuneytozturk.saglikturizmi.model.AppointmentDTO;
 import com.mcuneytozturk.saglikturizmi.model.HotelDTO;
+import com.mcuneytozturk.saglikturizmi.model.PageDTO;
 import com.mcuneytozturk.saglikturizmi.util.BaseMapper;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -13,7 +18,7 @@ public class HotelMapper implements BaseMapper<HotelDTO, HotelEntity> {
 
     private RoomMapper roomMapper;
 
-    public HotelMapper(RoomMapper roomMapper) {
+    public HotelMapper(@Lazy RoomMapper roomMapper) {
         this.roomMapper = roomMapper;
     }
 
@@ -77,5 +82,19 @@ public class HotelMapper implements BaseMapper<HotelDTO, HotelEntity> {
         entity.setRooms(roomMapper.dtoListTOEntityList(dto.getRooms()));
 
         return entity;
+    }
+    @Override
+    public PageDTO<HotelDTO> pageEntityToPageDTO(Page<HotelEntity> entities) {
+        PageDTO<HotelDTO> pageDTO = new PageDTO<>();
+        pageDTO.setTotalPages(entities.getTotalPages());
+        pageDTO.setSort(entities.getSort());
+        pageDTO.setNumberOfElements(entities.getNumberOfElements());
+        pageDTO.setSize(entities.getSize());
+        pageDTO.setContent(entityListToDTOList(entities.getContent()));
+        pageDTO.setTotalElements(entities.getTotalElements());
+        pageDTO.setNumber(entities.getNumber());
+
+
+        return pageDTO;
     }
 }

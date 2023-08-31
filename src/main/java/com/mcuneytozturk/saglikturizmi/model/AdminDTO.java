@@ -9,5 +9,6 @@ public class AdminDTO extends BaseDTO {
     private String firstName;
     private String lastName;
     private String password;
+    private String email;
 
 }

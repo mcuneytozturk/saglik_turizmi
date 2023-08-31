@@ -12,7 +12,6 @@ public class PatientDTO extends BaseDTO {
     private int age;
     private String email;
     private String password;
-    private String photoLink;
     private ReservationDTO reservation;
     private AppointmentDTO appointment;
     private List<ReportDTO> reports;

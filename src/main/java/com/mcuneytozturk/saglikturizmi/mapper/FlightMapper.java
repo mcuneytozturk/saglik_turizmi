@@ -1,8 +1,12 @@
 package com.mcuneytozturk.saglikturizmi.mapper;
 
+import com.mcuneytozturk.saglikturizmi.database.entity.AppointmentEntity;
 import com.mcuneytozturk.saglikturizmi.database.entity.FlightEntity;
+import com.mcuneytozturk.saglikturizmi.model.AppointmentDTO;
 import com.mcuneytozturk.saglikturizmi.model.FlightDTO;
+import com.mcuneytozturk.saglikturizmi.model.PageDTO;
 import com.mcuneytozturk.saglikturizmi.util.BaseMapper;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -80,5 +84,20 @@ public class FlightMapper implements BaseMapper<FlightDTO, FlightEntity> {
         entity.setCapacity(dto.getCapacity());
 
         return entity;
+    }
+
+    @Override
+    public PageDTO<FlightDTO> pageEntityToPageDTO(Page<FlightEntity> entities) {
+        PageDTO<FlightDTO> pageDTO = new PageDTO<>();
+        pageDTO.setTotalPages(entities.getTotalPages());
+        pageDTO.setSort(entities.getSort());
+        pageDTO.setNumberOfElements(entities.getNumberOfElements());
+        pageDTO.setSize(entities.getSize());
+        pageDTO.setContent(entityListToDTOList(entities.getContent()));
+        pageDTO.setTotalElements(entities.getTotalElements());
+        pageDTO.setNumber(entities.getNumber());
+
+
+        return pageDTO;
     }
 }

@@ -1,8 +1,10 @@
 package com.mcuneytozturk.saglikturizmi.util;
+import com.mcuneytozturk.saglikturizmi.model.PageDTO;
 import com.mcuneytozturk.saglikturizmi.util.dbUtil.BaseEntity;
 import com.mcuneytozturk.saglikturizmi.util.dbUtil.BaseRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
@@ -17,6 +19,10 @@ public abstract class BaseController<
     abstract protected Service getService();
 
 
+    @GetMapping("/page-num/{pNum}/page-size/{pSize}")
+    public ResponseEntity<PageDTO<DTO>> getAll(@PathVariable int pNum, @PathVariable int pSize){
+        return new ResponseEntity<>(getService().getAll(1, 10), HttpStatus.OK);
+    }
 
     @GetMapping("{uuid}")
     public ResponseEntity<DTO> getByUuid(@PathVariable UUID uuid){
@@ -46,6 +52,7 @@ public abstract class BaseController<
     }
 
     @DeleteMapping("/{uuid}")
+    @Secured({"ROLE_USER", "ROLE_PATIENT"}) // ROLE_USER ve ROLE_PATIENT olan kayıtlı kullanıcılar veri silemez (sadece admin'ler veri silebilir, appointment ve reservation gibi veriler için müşteri hizmetleri aranır admin rolüne sahip kullanıcı iptal gerçekleştirebilir)
     public ResponseEntity<Boolean> deleteByUuid(@PathVariable UUID uuid){
         Boolean isDeleted = getService().delete(uuid);
         if(isDeleted){

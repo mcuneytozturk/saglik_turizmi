@@ -1,10 +1,15 @@
 package com.mcuneytozturk.saglikturizmi.mapper;
 
+import com.mcuneytozturk.saglikturizmi.database.entity.AppointmentEntity;
 import com.mcuneytozturk.saglikturizmi.database.entity.ReportEntity;
 import com.mcuneytozturk.saglikturizmi.database.entity.ReservationEntity;
+import com.mcuneytozturk.saglikturizmi.model.AppointmentDTO;
+import com.mcuneytozturk.saglikturizmi.model.PageDTO;
 import com.mcuneytozturk.saglikturizmi.model.ReportDTO;
 import com.mcuneytozturk.saglikturizmi.model.ReservationDTO;
 import com.mcuneytozturk.saglikturizmi.util.BaseMapper;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -27,6 +32,8 @@ public class ReservationMapper implements BaseMapper<ReservationDTO, Reservation
         dto.setCreationDate(entity.getCreationDate());
         dto.setUuid(entity.getUuid());
         dto.setUpdatedDate(entity.getUpdatedDate());
+        dto.setCheckInDate(entity.getCheckInDate());
+        dto.setCheckOutDate(entity.getCheckOutDate());
         dto.setPatient(patientMapper.entityToDTO(entity.getPatient()));
         dto.setRoom(roomMapper.entityToDTO(entity.getRoom()));
         dto.setPaid(entity.isPaid());
@@ -41,6 +48,8 @@ public class ReservationMapper implements BaseMapper<ReservationDTO, Reservation
         entity.setCreationDate(dto.getCreationDate());
         entity.setUuid(dto.getUuid());
         entity.setUpdatedDate(dto.getUpdatedDate());
+        entity.setCheckInDate(dto.getCheckInDate());
+        entity.setCheckOutDate(dto.getCheckOutDate());
         entity.setPatient(patientMapper.dtoToEntity(dto.getPatient()));
         entity.setRoom(roomMapper.dtoToEntity(dto.getRoom()));
         entity.setPaid(dto.isPaid());
@@ -76,10 +85,27 @@ public class ReservationMapper implements BaseMapper<ReservationDTO, Reservation
         entity.setCreationDate(dto.getCreationDate());
         entity.setUuid(dto.getUuid());
         entity.setUpdatedDate(dto.getUpdatedDate());
+        entity.setCheckInDate(dto.getCheckInDate());
+        entity.setCheckOutDate(dto.getCheckOutDate());
         entity.setPatient(patientMapper.dtoToEntity(dto.getPatient()));
         entity.setRoom(roomMapper.dtoToEntity(dto.getRoom()));
         entity.setPaid(dto.isPaid());
 
         return entity;
+    }
+
+    @Override
+    public PageDTO<ReservationDTO> pageEntityToPageDTO(Page<ReservationEntity> entities) {
+        PageDTO<ReservationDTO> pageDTO = new PageDTO<>();
+        pageDTO.setTotalPages(entities.getTotalPages());
+        pageDTO.setSort(entities.getSort());
+        pageDTO.setNumberOfElements(entities.getNumberOfElements());
+        pageDTO.setSize(entities.getSize());
+        pageDTO.setContent(entityListToDTOList(entities.getContent()));
+        pageDTO.setTotalElements(entities.getTotalElements());
+        pageDTO.setNumber(entities.getNumber());
+
+
+        return pageDTO;
     }
 }

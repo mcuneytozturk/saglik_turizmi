@@ -1,5 +1,6 @@
 package com.mcuneytozturk.saglikturizmi.database.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.mcuneytozturk.saglikturizmi.model.HospitalDTO;
 import com.mcuneytozturk.saglikturizmi.model.PatientDTO;
 import com.mcuneytozturk.saglikturizmi.util.dbUtil.BaseEntity;
@@ -27,9 +28,10 @@ public class DoctorEntity extends BaseEntity {
     @ManyToMany
     private List<PatientEntity> patients;
     @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnore
     private HospitalEntity hospital;
     @OneToMany(mappedBy = "doctor", fetch = FetchType.LAZY)
     private List<ReportEntity> reports;
-    @OneToMany
+    @OneToMany(mappedBy = "doctor", fetch = FetchType.LAZY)
     private List<AppointmentEntity> appointments;
 }

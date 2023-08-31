@@ -1,8 +1,12 @@
 package com.mcuneytozturk.saglikturizmi.mapper;
 
+import com.mcuneytozturk.saglikturizmi.database.entity.AppointmentEntity;
 import com.mcuneytozturk.saglikturizmi.database.entity.ReportEntity;
+import com.mcuneytozturk.saglikturizmi.model.AppointmentDTO;
+import com.mcuneytozturk.saglikturizmi.model.PageDTO;
 import com.mcuneytozturk.saglikturizmi.model.ReportDTO;
 import com.mcuneytozturk.saglikturizmi.util.BaseMapper;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -81,5 +85,20 @@ public class ReportMapper implements BaseMapper<ReportDTO, ReportEntity> {
         entity.setDetail(dto.getDetail());
 
         return entity;
+    }
+
+    @Override
+    public PageDTO<ReportDTO> pageEntityToPageDTO(Page<ReportEntity> entities) {
+        PageDTO<ReportDTO> pageDTO = new PageDTO<>();
+        pageDTO.setTotalPages(entities.getTotalPages());
+        pageDTO.setSort(entities.getSort());
+        pageDTO.setNumberOfElements(entities.getNumberOfElements());
+        pageDTO.setSize(entities.getSize());
+        pageDTO.setContent(entityListToDTOList(entities.getContent()));
+        pageDTO.setTotalElements(entities.getTotalElements());
+        pageDTO.setNumber(entities.getNumber());
+
+
+        return pageDTO;
     }
 }
